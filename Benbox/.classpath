@@ -3,10 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/maria/workspace/Benbox/libs/android-support-v4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/maria/workspace/Benbox/libs/dropbox-android-sdk-1.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/maria/workspace/Benbox/libs/httpmime-4.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/maria/workspace/Benbox/libs/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maria/git/benbox/Benbox/libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maria/git/benbox/Benbox/libs/dropbox-android-sdk-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maria/git/benbox/Benbox/libs/httpmime-4.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maria/git/benbox/Benbox/libs/json_simple-1.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -1,7 +1,7 @@
 package com.xoninja.benbox;
 
 
-import com.xoninja.notebox.R;
+import com.xoninja.benbox.R;
 
 import android.os.Bundle;
 import android.app.ListActivity;
@@ -21,7 +21,7 @@ public class ListadoNotas extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listadonotas);
-        listaNotas = (ListView) findViewById(R.id.listView);
+      //  listaNotas = (ListView) findViewById(R.id.listView);
        
         
         mDbHelper = new NotesDbAdapter(this);

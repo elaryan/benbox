@@ -1,6 +1,6 @@
 package com.xoninja.benbox;
 
-import com.xoninja.notebox.R;
+import com.xoninja.benbox.R;
 
 import android.content.Context;
 import android.view.View;
