@@ -21,7 +21,7 @@ public class ListadoNotas extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listadonotas);
-      //  listaNotas = (ListView) findViewById(R.id.listView);
+        //listaNotas = (ListView) findViewById(R.id.listView1);
        
         
         mDbHelper = new NotesDbAdapter(this);
