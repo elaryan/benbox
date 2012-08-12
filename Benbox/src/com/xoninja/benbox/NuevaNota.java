@@ -23,6 +23,10 @@ import com.xoninja.benbox.R;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,10 +66,11 @@ public class NuevaNota extends Activity {
           		guardarNota(tituloNota.getText().toString(),contenidoNota.getText().toString());
           		//upload(tituloNota.getText().toString(),contenidoNota.getText().toString());
 				new UploadTask().execute(tituloNota.getText().toString(), contenidoNota.getText().toString());
-          		
+          		sendNotification(tituloNota.getText().toString());
           		       
           	}
-
+         
+                   
     		private void guardarNota(String titulo, String contenido) {
     			 //String noteName = "Note " + mNoteNumber++;
     			    mDbHelper.open();
@@ -80,12 +85,35 @@ public class NuevaNota extends Activity {
     		        	Toast.makeText(NuevaNota.this, "FAIL", Toast.LENGTH_LONG).show();
     		        
     		}
-          });
+    		
+    		
+          });//saveOnClickListener
         
         
-       }
+       }//onCreate
         
       
+    public void sendNotification(String fileName)
+    {
+        // Execute Check and Notify
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+        int icon = R.drawable.dropbox;
+        CharSequence tickerText = "finished upload!";
+        long when = System.currentTimeMillis();
+        Notification notification = new Notification(icon, tickerText, when);
+        Context context = getApplicationContext();
+        CharSequence contentTitle = "Finished Upload";
+        CharSequence contentText = fileName;
+        Intent notificationIntent = new Intent(this, ListadoNotas.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        //notification.defaults |= Notification.DEFAULT_VIBRATE;
+
+        notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
+        int HELLO_ID = 1;
+        mNotificationManager.notify(HELLO_ID, notification);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

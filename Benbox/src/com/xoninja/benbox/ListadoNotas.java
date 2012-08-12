@@ -31,12 +31,14 @@ public class ListadoNotas extends ListActivity {
         Cursor c = mDbHelper.fetchAllNotes();
         startManagingCursor(c);
 
-        String[] from = new String[] { NotesDbAdapter.KEY_TITLE };
-        int[] to = new int[] { R.id.text1 };
-        
+        String[] from = new String[] { NotesDbAdapter.KEY_TITLE, NotesDbAdapter.KEY_BODY};
+        //int[] to = new int[] { R.id.text2, R.id.text1 };
+        int[] to = new int[] { R.id.textView1, R.id.textView2 };
         // Now create an array adapter and set it to display using our row
+        /*SimpleCursorAdapter notes =
+            new SimpleCursorAdapter(this, R.layout.fila, c, from, to);*/
         SimpleCursorAdapter notes =
-            new SimpleCursorAdapter(this, R.layout.fila, c, from, to);
+                new SimpleCursorAdapter(this, R.layout.filamaquetada, c, from, to);
         setListAdapter(notes);
         
         
