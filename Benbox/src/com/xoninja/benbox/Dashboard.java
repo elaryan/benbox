@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.Window;
 import android.widget.GridView;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,8 +17,10 @@ public class Dashboard extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
+         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
          setContentView(R.layout.dashboard);
-         
+
          GridView gridview = (GridView) findViewById(R.id.grid);
          gridview.setAdapter(new ImageAdapter(this));
          
@@ -30,7 +33,6 @@ public class Dashboard extends Activity {
                  	startActivity(i);
                  	break;
                  case 1:
-                 	//Toast.makeText(Dashboard.this, "" + position + " SOON", Toast.LENGTH_LONG).show();
                  	i = new Intent(getApplicationContext(), ListadoNotas.class);
                  	startActivity(i);
                  	break;

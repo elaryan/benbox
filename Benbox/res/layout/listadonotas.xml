@@ -9,9 +9,11 @@
 
   	<ListView
   	    android:id="@id/android:list"
-  	    android:layout_width="fill_parent"
+  	    android:layout_width="0dip"
   	    android:layout_height="wrap_content"
-  	    android:layout_weight="1" >
+  	    android:layout_weight="1"
+  	    android:background="@drawable/background" >
+
   	</ListView>
         
 </LinearLayout>

@@ -33,6 +33,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class NuevaNota extends Activity {
 
 	private static final String PREFERENCES_FILENAME = "DBKeys";
 	private NotesDbAdapter mDbHelper;
+	@SuppressWarnings("unused")
 	private FileIO ioHelper = new FileIO();
 	 EditText tituloNota;
 	 EditText contenidoNota;
@@ -53,6 +55,8 @@ public class NuevaNota extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.nuevanota);
         
         tituloNota= (EditText) findViewById(R.id.titulonota);
@@ -72,28 +76,24 @@ public class NuevaNota extends Activity {
          
                    
     		private void guardarNota(String titulo, String contenido) {
-    			 //String noteName = "Note " + mNoteNumber++;
-    			    mDbHelper.open();
-    		        long result = mDbHelper.createNote(titulo, contenido);
-    		        if (result!= -1)
-    		        {
-    		        	Intent i = new Intent(getApplicationContext(), Dashboard.class);
-    		        	startActivity(i);
-    		        	
-    		        }
-    		        else
-    		        	Toast.makeText(NuevaNota.this, "FAIL", Toast.LENGTH_LONG).show();
-    		        
-    		}
-    		
-    		
-          });//saveOnClickListener
+   			    mDbHelper.open();
+		        long result = mDbHelper.createNote(titulo, contenido);
+		        if (result!= -1)
+		        {
+		        	Intent i = new Intent(getApplicationContext(), Dashboard.class);
+		        	startActivity(i);		        	
+		        }
+		        else
+		        	Toast.makeText(NuevaNota.this, "FAIL", Toast.LENGTH_LONG).show();    		        
+    			}
+         });//saveOnClickListener
         
         
-       }//onCreate
+    }//onCreate
         
       
-    public void sendNotification(String fileName)
+    @SuppressWarnings("deprecation")
+	public void sendNotification(String fileName)
     {
         // Execute Check and Notify
         String ns = Context.NOTIFICATION_SERVICE;
@@ -214,22 +214,12 @@ public class NuevaNota extends Activity {
 		 	String contenido = params[1];
 		 	try {
 				upload(titulo, contenido);
-				/*Toast toast = Toast.makeText(getApplicationContext(), "Done!", Toast.LENGTH_SHORT);
-				toast.show();*/
-			} catch (IOException e) {
+			} 
+		 	catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		    /*String url=params[0];
-		    // Dummy code
-		    for (int i = 0; i <= 100; i += 5) {
-		      try {
-		        Thread.sleep(50);
-		      } catch (InterruptedException e) {
-		        e.printStackTrace();
-		      }
-		       publishProgress(i);
-		    }*/
+		   
 		    return "All Done!";
 		 }
 

@@ -10,8 +10,8 @@ import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
 
@@ -24,6 +24,8 @@ public class ListadoNotas extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.listadonotas);   
         
         mDbHelper = new NotesDbAdapter(this);
@@ -34,23 +36,22 @@ public class ListadoNotas extends ListActivity {
         startManagingCursor(c);
 
         String[] from = new String[] { NotesDbAdapter.KEY_TITLE, NotesDbAdapter.KEY_BODY};
-        //int[] to = new int[] { R.id.text2, R.id.text1 };
+      
         int[] to = new int[] { R.id.textView1, R.id.textView2 };
-        // Now create an array adapter and set it to display using our row
-        /*SimpleCursorAdapter notes =
-            new SimpleCursorAdapter(this, R.layout.fila, c, from, to);*/
+        
         SimpleCursorAdapter notes =
                 new SimpleCursorAdapter(this, R.layout.filamaquetada, c, from, to);
         setListAdapter(notes);
                
     }
     
-    protected void onListItemClick(ListView l, View v, int position, 
+    @SuppressWarnings("deprecation")
+	protected void onListItemClick(ListView l, View v, int position, 
     		long id){
     	Log.d("listview id",((Integer)l.getId()).toString());
     	Log.d("position", ((Integer)position).toString());
     	
-		Cursor obj = (Cursor)l.getItemAtPosition(position);//obj SQLiteCursor
+		Cursor obj = (Cursor)l.getItemAtPosition(position);
     	startManagingCursor(obj);
     	
     	String titulo = obj.getString(obj.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE));
