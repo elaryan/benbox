@@ -5,9 +5,13 @@ import com.xoninja.benbox.R;
 
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
 
@@ -20,9 +24,7 @@ public class ListadoNotas extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listadonotas);
-        //listaNotas = (ListView) findViewById(R.id.listView1);
-       
+        setContentView(R.layout.listadonotas);   
         
         mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();
@@ -40,19 +42,28 @@ public class ListadoNotas extends ListActivity {
         SimpleCursorAdapter notes =
                 new SimpleCursorAdapter(this, R.layout.filamaquetada, c, from, to);
         setListAdapter(notes);
-        
-        
-       /*listaNotas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long id) {
-				Intent myIntent = new Intent(ListadoNotas.this, Nota.class);				
-		        Bundle bundle = new Bundle();
-		        bundle.putLong("position", position);
-		        myIntent.putExtras(bundle);
-				startActivityForResult(myIntent, 0);
-			}       	
-		});    */
-        
+               
+    }
+    
+    protected void onListItemClick(ListView l, View v, int position, 
+    		long id){
+    	Log.d("listview id",((Integer)l.getId()).toString());
+    	Log.d("position", ((Integer)position).toString());
+    	
+		Cursor obj = (Cursor)l.getItemAtPosition(position);//obj SQLiteCursor
+    	startManagingCursor(obj);
+    	
+    	String titulo = obj.getString(obj.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE));
+    	String nota =  obj.getString(obj.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY)); 
+    	Log.d("titulo" , titulo);
+    	Log.d("nota" , nota);
+    		
+    		
+    	Intent sendIntent = new Intent();
+    	sendIntent.setAction(Intent.ACTION_SEND);
+    	sendIntent.putExtra(Intent.EXTRA_TEXT, nota);
+    	sendIntent.setType("text/plain");
+    	startActivity(Intent.createChooser(sendIntent, "Send to..."));    	
     }
 
     @Override
