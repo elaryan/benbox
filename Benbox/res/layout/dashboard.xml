@@ -2,20 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black" >
+    android:background="@color/black"
+    android:gravity="center" >
 
       <GridView
           android:id="@+id/grid"
           android:layout_width="fill_parent"
           android:layout_height="fill_parent"
+          android:layout_alignParentBottom="false"
           android:layout_alignParentLeft="false"
-          android:layout_alignParentTop="true"
-          android:layout_centerHorizontal="true"
-          android:layout_centerInParent="true"
+          android:layout_alignParentRight="false"
+          android:layout_alignParentTop="false"
+          android:layout_alignWithParentIfMissing="false"
+          android:layout_centerHorizontal="false"
+          android:layout_centerInParent="false"
           android:layout_centerVertical="true"
           android:background="@drawable/background"
           android:gravity="center"
-          android:numColumns="auto_fit" >
+          android:numColumns="auto_fit"
+          android:paddingBottom="@dimen/margenSuperior"
+          android:paddingLeft="@dimen/contenido"
+          android:paddingRight="@dimen/contenido"
+          android:paddingTop="@dimen/margenSuperior"
+          android:verticalSpacing="@dimen/margenSuperior" >
 
     </GridView>
 

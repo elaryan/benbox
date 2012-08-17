@@ -1,20 +1,22 @@
 package com.xoninja.benbox;
 
 
-import com.xoninja.benbox.R;
 
+import com.xoninja.benbox.R;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 
+@SuppressLint("NewApi")
 public class ListadoNotas extends ListActivity {
 
 	private NotesDbAdapter mDbHelper;
@@ -24,8 +26,7 @@ public class ListadoNotas extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+        this.getActionBar().setHomeButtonEnabled(true);
         setContentView(R.layout.listadonotas);   
         
         mDbHelper = new NotesDbAdapter(this);
@@ -71,5 +72,22 @@ public class ListadoNotas extends ListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.listadonotas, menu);
         return true;
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item){
+    	
+    	Intent i;
+    	
+    	switch(item.getItemId()){
+	    	case R.id.menu_nuevanota:
+	    		i = new Intent(getApplicationContext(), NuevaNota.class);
+	         	startActivity(i);
+	      		break;
+	    	default:
+	    		i = new Intent(getApplicationContext(), Dashboard.class);
+	         	startActivity(i);
+    	}
+    	return true;
+    	
     }
 }

@@ -32,8 +32,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,8 +55,8 @@ public class NuevaNota extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getActionBar().setHomeButtonEnabled(true);
         setContentView(R.layout.nuevanota);
         
         tituloNota= (EditText) findViewById(R.id.titulonota);
@@ -119,6 +119,23 @@ public class NuevaNota extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nuevanota, menu);
         return true;
+    }
+    
+ public boolean onOptionsItemSelected(MenuItem item){
+    	
+    	Intent i;
+    	
+    	switch(item.getItemId()){
+	    	case R.id.menu_listadonotas:
+	    		i = new Intent(getApplicationContext(), ListadoNotas.class);
+	         	startActivity(i);
+	      		break;
+	    	default:
+	    		i = new Intent(getApplicationContext(), Dashboard.class);
+	         	startActivity(i);
+    	}
+    	return true;
+    	
     }
     
     private void upload(String nombreFichero, String contenidoFichero) throws IOException{
