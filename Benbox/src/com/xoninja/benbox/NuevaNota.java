@@ -22,6 +22,7 @@ import com.xoninja.benbox.R;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -52,7 +53,8 @@ public class NuevaNota extends Activity {
 	 final static private AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
 
 
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // requestWindowFeature(Window.FEATURE_NO_TITLE);
