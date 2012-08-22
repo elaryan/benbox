@@ -49,23 +49,34 @@ public class ListadoNotas extends ListActivity {
     @SuppressWarnings("deprecation")
 	protected void onListItemClick(ListView l, View v, int position, 
     		long id){
-    	Log.d("listview id",((Integer)l.getId()).toString());
-    	Log.d("position", ((Integer)position).toString());
+    	//Log.d("listview id",((Integer)l.getId()).toString());
+    	//Log.d("position", ((Integer)position).toString());
     	
 		Cursor obj = (Cursor)l.getItemAtPosition(position);
     	startManagingCursor(obj);
     	
     	String titulo = obj.getString(obj.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE));
     	String nota =  obj.getString(obj.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY)); 
+    	String rowID = obj.getString(obj.getColumnIndexOrThrow(NotesDbAdapter.KEY_ROWID));
     	Log.d("titulo" , titulo);
     	Log.d("nota" , nota);
+    	Log.d("rowId", rowID);
+    	
+    	Bundle bundle = new Bundle();
+        bundle.putString("titulo", titulo);
+        bundle.putString("nota", nota);
+        bundle.putString("rowId", rowID);
+        
+        Intent intentNota = new Intent(this, Nota.class);
+        intentNota.putExtras(bundle);
+        startActivity(intentNota);
     		
     		
-    	Intent sendIntent = new Intent();
+    	/*Intent sendIntent = new Intent();
     	sendIntent.setAction(Intent.ACTION_SEND);
     	sendIntent.putExtra(Intent.EXTRA_TEXT, nota);
     	sendIntent.setType("text/plain");
-    	startActivity(Intent.createChooser(sendIntent, "Send to..."));    	
+    	startActivity(Intent.createChooser(sendIntent, "Send to..."));    	*/
     }
 
     @Override

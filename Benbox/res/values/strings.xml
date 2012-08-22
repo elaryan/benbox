@@ -13,5 +13,8 @@
     <string name="botonguardar">Guardar</string>
     <string name="title_activity_nota">Nota</string>
     <string name="title_activity_dropbox">Dropbox</string>
+    <string name="share">Compartir</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
 
 </resources>
