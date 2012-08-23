@@ -40,6 +40,10 @@ public class Dashboard extends Activity {
                 	 i = new Intent(getApplicationContext(), Dropbox.class);
                 	 startActivity(i);
                 	 break;
+                 case 3:
+                	 i = new Intent(getApplicationContext(), Busqueda.class);
+                	 startActivity(i);
+                	 break;
                  }
                  	
              	//Toast.makeText(Dashboard.this, "" + position, Toast.LENGTH_SHORT).show();

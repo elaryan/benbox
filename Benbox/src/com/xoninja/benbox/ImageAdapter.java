@@ -47,7 +47,7 @@ public class ImageAdapter extends BaseAdapter {
  // references to our images
     private Integer[] acciones = {
            R.drawable.add, R.drawable.list,
-           R.drawable.sync
+           R.drawable.sync, R.drawable.search
           
     };
 }

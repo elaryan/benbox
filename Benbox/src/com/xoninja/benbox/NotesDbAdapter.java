@@ -147,6 +147,12 @@ public class NotesDbAdapter {
                 KEY_BODY}, null, null, null, null, null);
     }
 
+    
+    public Cursor fetchString(String consulta){
+    	return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,
+                KEY_BODY}, KEY_TITLE + " LIKE '%" + consulta +"%'" +" OR " + KEY_BODY + " LIKE '%" + consulta + "%'", null, null, null, null);
+    }
+    
     /**
      * Return a Cursor positioned at the note that matches the given rowId
      * 

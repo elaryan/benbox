@@ -14,30 +14,22 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-       
-        <activity
-            android:name=".Dashboard"
-            >
+        <activity android:name=".Dashboard" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NuevaNota"
-            >
+        <activity android:name=".NuevaNota" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ListadoNotas"
-            >
+        <activity android:name=".ListadoNotas" >
         </activity>
         <activity
-            android:name=".Nota"
-            android:label="@string/title_activity_nota" >
+            android:name=".Nota">
         </activity>
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
@@ -58,12 +50,43 @@
             android:name="com.xoninja.benbox.Dropbox"
             android:label="@string/title_activity_dropbox" >
         </activity>
-        <receiver android:name="BenboxWidgetProvider" android:label="benbox">
-  			<intent-filter>
-        		<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-  			</intent-filter>
- 			 <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_addlist" />
-		</receiver>
+
+        <receiver
+            android:name="BenboxWidgetProvider"
+            android:label="benbox" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_addlist" />
+        </receiver>
+
+        <activity
+            android:name=".EditarNota" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Busqueda">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ResultadoBusqueda" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

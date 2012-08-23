@@ -5,7 +5,9 @@ import com.xoninja.benbox.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
@@ -24,6 +26,7 @@ public class Nota extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getActionBar().setHomeButtonEnabled(true);
         setContentView(R.layout.nota);
         
        
@@ -58,25 +61,57 @@ public class Nota extends Activity {
     
  public boolean onOptionsItemSelected(MenuItem item){
     	
-    	Intent i;
+    	
     	Toast toast;
+    	Intent i;
     	switch(item.getItemId()){
 	    	case R.id.nota_delete:
 	    		
-	    		if(deleteNote(rowID)){
-	    			toast = Toast.makeText(Nota.this, "Nota eliminada", Toast.LENGTH_LONG);
-	    			toast.show();
-	    		}else{
-	    			toast = Toast.makeText(Nota.this, "Error al eliminar la nota", Toast.LENGTH_LONG);
-	    			toast.show();
-	    		}
-	    		i = new Intent(getApplicationContext(), ListadoNotas.class);
-	         	startActivity(i);
+	    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    		builder.setMessage("Eliminar nota?")
+	    		       .setCancelable(false)
+	    		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	    		           public void onClick(DialogInterface dialog, int id) {
+	    		        	   Toast toastDelete;
+	    		        	   Intent i;
+	    			    		if(deleteNote(rowID)){
+	    			    						
+	    			    			toastDelete = Toast.makeText(Nota.this, "Nota eliminada", Toast.LENGTH_LONG);
+	    			    			toastDelete.show();
+	    			    			
+	    			    		}else{
+	    			    			toastDelete = Toast.makeText(Nota.this, "Error al eliminar la nota", Toast.LENGTH_LONG);
+	    			    			toastDelete.show();
+	    			    		}
+	    			    		
+	    			    		i = new Intent(getApplicationContext(), ListadoNotas.class);
+	    			         	startActivity(i);
+	    		           }
+	    		       })
+	    		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+	    		           public void onClick(DialogInterface dialog, int id) {
+	    		                dialog.cancel();
+	    		           }
+	    		       });
+	    		AlertDialog alert = builder.create();
+	    		alert.show();
 	    			
 	      		break;
+	      		
 	    	case R.id.nota_edit:
+	    		
+	    		/*Bundle bundle = new Bundle();
+    			bundle.putString("titulo", titulo);
+    			bundle.putString("titulo", titulo);
+    			bundle.putString("rowId", rowID);
+
+    			Intent editIntent = new Intent(getApplicationContext(), EditarNota.class);
+    			editIntent.putExtras(bundle);
+    			startActivity(editIntent);*/
+    			
 	    		toast = Toast.makeText(Nota.this, "Funcionalidad pendiente", Toast.LENGTH_LONG);
     			toast.show();
+    			
 	      		break;
 	    	case R.id.nota_share:
 	    		Intent sendIntent = new Intent();
@@ -84,6 +119,15 @@ public class Nota extends Activity {
 	        	sendIntent.putExtra(Intent.EXTRA_TEXT, nota);
 	        	sendIntent.setType("text/plain");
 	        	startActivity(Intent.createChooser(sendIntent, "Send to..."));
+	    	case R.id.menu_nuevanota:
+	    		i = new Intent(getApplicationContext(), NuevaNota.class);
+	         	startActivity(i);
+	      		break;
+	    	case R.id.menu_listadonotas:
+	    		i = new Intent(getApplicationContext(), ListadoNotas.class);
+	         	startActivity(i);
+	      		break;
+	    	
 	    	default:
 	    		Log.d("menu", "default");
 	    		/*i = new Intent(getApplicationContext(), Dashboard.class);
