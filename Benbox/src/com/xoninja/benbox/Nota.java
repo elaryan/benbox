@@ -4,6 +4,7 @@ package com.xoninja.benbox;
 import com.xoninja.benbox.R;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+@SuppressLint({ "NewApi", "NewApi" })
 public class Nota extends Activity {
 
 	private NotesDbAdapter mDbHelper;
@@ -100,17 +102,18 @@ public class Nota extends Activity {
 	      		
 	    	case R.id.nota_edit:
 	    		
-	    		/*Bundle bundle = new Bundle();
+	    		Bundle bundle = new Bundle();
+	    		bundle.putString("tipo", "editar");
     			bundle.putString("titulo", titulo);
-    			bundle.putString("titulo", titulo);
+    			bundle.putString("nota", nota);
     			bundle.putString("rowId", rowID);
 
-    			Intent editIntent = new Intent(getApplicationContext(), EditarNota.class);
+    			Intent editIntent = new Intent(getApplicationContext(), NuevaNota.class);
     			editIntent.putExtras(bundle);
-    			startActivity(editIntent);*/
+    			startActivity(editIntent);
     			
-	    		toast = Toast.makeText(Nota.this, "Funcionalidad pendiente", Toast.LENGTH_LONG);
-    			toast.show();
+	    		/*toast = Toast.makeText(Nota.this, "Funcionalidad pendiente", Toast.LENGTH_LONG);
+    			toast.show();*/
     			
 	      		break;
 	    	case R.id.nota_share:

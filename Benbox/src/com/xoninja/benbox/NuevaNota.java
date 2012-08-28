@@ -51,6 +51,9 @@ public class NuevaNota extends Activity {
 	 final static private String APP_KEY = "l4vyzwpfgt6hkjk";
 	 final static private String APP_SECRET = "u1dhenxq7o3xicr";
 	 final static private AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
+	 boolean nueva = true;//por defecto creamos siempre una nueva
+	 long id = 0;
+	 
 
 
     @SuppressLint("NewApi")
@@ -65,29 +68,61 @@ public class NuevaNota extends Activity {
         contenidoNota = (EditText) findViewById(R.id.contenidonota);
         Button guardar = (Button) findViewById(R.id.button1);
         
+        
+        Bundle bundle = getIntent().getExtras();
+        Log.d("bundle", bundle.getString("tipo"));
+        
+        if(((bundle.getString("tipo")).compareTo("editar")==0)){
+        	Log.d("n/e", "editar");
+	        String titulo = bundle.getString("titulo");
+	        String nota = bundle.getString("nota");
+	        String rowID = bundle.getString("rowId");
+	        
+	        tituloNota.setText(titulo);
+	        contenidoNota.setText(nota);
+	        
+	        nueva = false;//indicamos que se trata de una nota ya existente
+	        id = Long.valueOf(rowID);
+        }
+        
+        
         mDbHelper = new NotesDbAdapter(this);
         
         guardar.setOnClickListener(new OnClickListener(){
           	public void onClick(View v){
-          		guardarNota(tituloNota.getText().toString(),contenidoNota.getText().toString());
-          		//upload(tituloNota.getText().toString(),contenidoNota.getText().toString());
+          		Log.d("inside", "onclick");
+          		guardarNota(tituloNota.getText().toString(),contenidoNota.getText().toString(), nueva, id);
 				new UploadTask().execute(tituloNota.getText().toString(), contenidoNota.getText().toString());
           		sendNotification(tituloNota.getText().toString());
           		       
           	}
          
                    
-    		private void guardarNota(String titulo, String contenido) {
-   			    mDbHelper.open();
-		        long result = mDbHelper.createNote(titulo, contenido);
-		        if (result!= -1)
-		        {
-		        	Intent i = new Intent(getApplicationContext(), Dashboard.class);
-		        	startActivity(i);		        	
-		        }
-		        else
-		        	Toast.makeText(NuevaNota.this, "FAIL", Toast.LENGTH_LONG).show();    		        
-    			}
+    		private void guardarNota(String titulo, String contenido, boolean nueva, long id) {
+   			    Log.d("inside", "guardar");
+    			mDbHelper.open();
+   			    if (nueva){
+			        long result = mDbHelper.createNote(titulo, contenido);
+			        if (result!= -1)
+			        {
+			        	Intent i = new Intent(getApplicationContext(), Dashboard.class);
+			        	startActivity(i);		        	
+			        }
+			        else
+			        	Toast.makeText(NuevaNota.this, "FAIL", Toast.LENGTH_LONG).show();    		        
+	    			}
+	    		else{
+	    			boolean result = mDbHelper.updateNote(id, titulo, contenido);
+			        if (result)
+			        {
+			        	Intent i = new Intent(getApplicationContext(), Dashboard.class);
+			        	startActivity(i);		        	
+			        }
+			        else
+			        	Toast.makeText(NuevaNota.this, "FAIL", Toast.LENGTH_LONG).show();
+    			
+    		}
+    		}
          });//saveOnClickListener
         
         

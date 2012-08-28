@@ -29,7 +29,10 @@ public class Dashboard extends Activity {
              	Intent i;
                  switch (position){
                  case 0:
+                	Bundle bundle = new Bundle();
+                	bundle.putString("tipo", "nueva");
                  	i = new Intent(getApplicationContext(), NuevaNota.class);
+                 	i.putExtras(bundle);
                  	startActivity(i);
                  	break;
                  case 1:
